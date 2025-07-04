@@ -8,10 +8,14 @@ const PORT = process.env.PORT || 5000;
 //middleware
 const app = express();
 
-//route
+app.use(express.json());
+
 app.get('/', (req, res)=> {
     res.send('hello world')
 });
+
+// Routes
+app.use('/api/users', require('./routes/userRoutes'));
 
 //Start server only after DB connection
 const startServer = async () => {

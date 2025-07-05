@@ -1,15 +1,19 @@
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import SignUpPage from './pages/SignUpPage';
 
-import './App.css'
 
 function App() {
-  
-
   return (
-    <div id="centerDiv">
-      <h1>Hello, Centered!</h1>
-    </div>
+    <Router>
       
-  )
+      <h1>hello word</h1>
+
+      <Routes>
+        <Route path="/signup" element={<SignUpPage />} />
+        
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

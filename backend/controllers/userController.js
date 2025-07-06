@@ -46,7 +46,8 @@ exports.loginUser = async (req, res) => {
 
 // Get all users
 exports.getAllUsers = async (req, res) => {
-  const users = await User.find().select('-password');
+  const users = await User.find();
+  //const users = await User.find().select('-password');
   res.json(users);
   
 };

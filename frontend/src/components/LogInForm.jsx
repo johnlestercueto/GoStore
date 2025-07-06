@@ -1,10 +1,9 @@
-import { useState } from 'react';
-import useForm from '../hooks/useForm';
+import { useState } from "react"
+import useForm from "../hooks/useForm"
 import { useNavigate } from 'react-router-dom';
 
-export default function SignUpForm() {
-  const { values, handleChange, resetForm } = useForm({
-    username: '',
+const LogInForm = () => {
+    const { values, handleChange, resetForm } = useForm({
     email: '',
     password: '',
   });
@@ -12,19 +11,17 @@ export default function SignUpForm() {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     
     try {
-      const response = await fetch('http://localhost:5000/api/users/signup', {
+      const response = await fetch('http://localhost:5000/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: values.username,
           email: values.email,
           password: values.password,
         }),
@@ -33,10 +30,10 @@ export default function SignUpForm() {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage(data.message || 'Signup successful!');
-        navigate('/login');
+        setMessage(data.message || 'log in successful!');
+        navigate('/home');
       } else {
-        setMessage(data.message || 'Signup failed.');
+        setMessage(data.message || 'log in failed.');
         resetForm();
       }
     } catch (error) {
@@ -47,12 +44,6 @@ export default function SignUpForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        name="username"
-        value={values.username}
-        onChange={handleChange}
-        placeholder="Username"
-      />
       <input
         name="email"
         value={values.email}
@@ -66,10 +57,12 @@ export default function SignUpForm() {
         onChange={handleChange}
         placeholder="Password"
       />
-      <button type="submit">Sign Up</button>
+      <button type="submit">Log in</button>
 
       {/* Eto yung mag-display ng message */}
       {message && <p>{message}</p>}
     </form>
-  );
+  )
 }
+
+export default LogInForm

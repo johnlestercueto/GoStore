@@ -1,14 +1,25 @@
 const express = require('express');
-const connectDB = require('./config/db')
+const cors = require('cors');
 require('dotenv').config();
 
+const connectDB = require('./config/db')
 const PORT = process.env.PORT || 5000;
 
+/*const corsOptions = {
+  origin: 'http://localhost:5173', // or kung deployed, e.g. 'https://your-frontend.com'
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // optional: anong HTTP methods lang allowed
+  credentials: true         // optional: kung kailangan mag-send ng cookies
+
+  //app.use(cors(corsOptions));
+
+};*/
 
 //middleware
 const app = express();
 
 app.use(express.json());
+app.use(cors());
+
 
 app.get('/', (req, res)=> {
     res.send('hello world')

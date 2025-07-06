@@ -5,9 +5,11 @@ exports.registerUser = async (req, res) => {
     try {
         const {username, email, password } = req.body;
 
+        //console.log(req.body);
+
         if (!username || !email || !password) {
-           return res.status(400).json({ message: 'All fields are required.' });
-        }
+        return res.status(400).json({ message: 'All fields are required.' });}
+       
 
         const existingUser = await User.findOne({email});
         if(existingUser) return res.status(400).json({message: 'Email already exist'});
@@ -15,7 +17,7 @@ exports.registerUser = async (req, res) => {
         const newUser = new User({username, email, password});
         await newUser.save();
 
-        res.status(201).json({message: 'User created successfully'});
+        res.status(201).json({message: 'Sign up successfully'});
     } catch (error) {
         res.status(500).json({error: error.message})
     }

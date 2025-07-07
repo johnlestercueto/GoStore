@@ -19,6 +19,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use('/uploads', express.static('uploads'));
 
 
 app.get('/', (req, res)=> {
@@ -27,6 +28,7 @@ app.get('/', (req, res)=> {
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/products', require('./routes/productRoutes'));
 
 //Start server only after DB connection
 const startServer = async () => {

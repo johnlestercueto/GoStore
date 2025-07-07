@@ -1,31 +1,45 @@
-import ProductCard from './ProductCard';
-import './ProductList.css';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ProductCard from "./ProductCard";
 
+export default function ProductList() {
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/products");
+        const data = await res.json();
+        setProducts(data);
+      } catch (err) {
+        console.error("Failed to fetch products", err);
+      }
+    };
 
-const ProductList = () => {
-  const products = [
-    { id: 1, title: 'Product 1', description: 'Description 1' },
-    { id: 2, title: 'Product 2', description: 'Description 2' },
-    { id: 3, title: 'Product 3', description: 'Description 3' },
-    // add more as needed
-  ];
+    fetchProducts();
+  }, []);
+
+  const handleProductClick = (id) => {
+    navigate(`/product/${id}`);
+  };
 
   return (
-    <div className="product-list">
-      <h2>Product List</h2>
-      <div className="product-grid">
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            title={product.title}
-            description={product.description}
-          />
-        ))}
-      </div>
+    <div style={{ padding: "20px" }}>
+      <h2>All Products</h2>
+      {products.length === 0 ? (
+        <p>No products available.</p>
+      ) : (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+          {products.map((product) => (
+            <ProductCard
+              key={product._id}
+              product={product}
+              onClick={() => handleProductClick(product._id)}
+            />
+          ))}
+        </div>
+      )}
     </div>
-  )
+  );
 }
-
-export default ProductList

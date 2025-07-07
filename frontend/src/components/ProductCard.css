@@ -1,13 +1,30 @@
 .product-card {
-  background-color: white;
   border: 1px solid #ddd;
+  border-radius: 8px;
   padding: 10px;
-  border-radius: 4px;
+  width: 220px;
+  cursor: pointer;
+  transition: transform 0.2s;
   text-align: center;
 }
 
+.product-card:hover {
+  transform: scale(1.05);
+}
+
 .product-image {
-  background-color: #eee;
-  height: 100px;
-  margin-bottom: 10px;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.product-price {
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.product-description {
+  font-size: 14px;
+  color: #666;
 }

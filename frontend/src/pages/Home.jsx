@@ -1,8 +1,15 @@
 import React from 'react'
+import Header from '../components/Header';
+import ProductList from '../components/ProductList';
+import '../components/Home.css';
+
 
 const Home = () => {
   return (
-    <div>Home page</div>
+    <div>
+      <Header />
+      <ProductList />
+    </div>
   )
 }
 
